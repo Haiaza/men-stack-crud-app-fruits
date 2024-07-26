@@ -13,5 +13,6 @@ app.listen(3000, () =>{
 //* READ
 //GET Requests
 app.get('/', async (req, res) =>{
-    res.send('Hello Friend!')
+    res.render('index.ejs')
+    // swapping send for render to make content appear
 })
