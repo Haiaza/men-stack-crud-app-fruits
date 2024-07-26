@@ -10,3 +10,8 @@ const app = express();
 app.listen(3000, () =>{
     console.log('Port 3000 is active')
 })
+//* READ
+//GET Requests
+app.get('/', async (req, res) =>{
+    res.send('Hello Friend!')
+})
