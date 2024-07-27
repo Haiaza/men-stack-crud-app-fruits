@@ -4,11 +4,11 @@ dotenv.config() // loads the enviornment variables
 // pull the server requirements
 const express = require('express');
 const mongoose = require('mongoose')
-
+const MONGODB_URI = process.env.MONGODB_URI
 //initialize the server
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URI); //our tool to connect to MongoDB using my URI inside of .env
+mongoose.connect(MONGODB_URI); //our tool to connect to MongoDB using my URI inside of .env
 mongoose.connection.on("connected", () =>{
     console.log(`Connected to MongoDB ${mongoose.connection.name}`)
 })
