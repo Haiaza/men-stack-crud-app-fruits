@@ -8,6 +8,9 @@ const MONGODB_URI = process.env.MONGODB_URI
 //initialize the server
 const app = express();
 
+//* Importing the Fruit model
+const Fruit = require('./models/fruit')
+
 mongoose.connect(MONGODB_URI); //our tool to connect to MongoDB using my URI inside of .env
 mongoose.connection.on("connected", () =>{
     console.log(`Connected to MongoDB ${mongoose.connection.name}`)
@@ -21,4 +24,7 @@ app.listen(3000, () =>{
 app.get('/', async (req, res) =>{
     res.render('index.ejs')
     // swapping send for render to make content appear
+})
+app.get('/fruits/new', (req, res) =>{
+    res.send("This route sends the user a form")
 })
