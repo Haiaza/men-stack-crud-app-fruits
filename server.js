@@ -11,6 +11,9 @@ const app = express();
 //* Importing the Fruit model
 const Fruit = require('./models/fruit')
 
+app.use(express.urlencoded({ extended: false }));
+
+
 mongoose.connect(MONGODB_URI); //our tool to connect to MongoDB using my URI inside of .env
 mongoose.connection.on("connected", () =>{
     console.log(`Connected to MongoDB ${mongoose.connection.name}`)
@@ -25,6 +28,17 @@ app.get('/', async (req, res) =>{
     res.render('index.ejs')
     // swapping send for render to make content appear
 })
+app.get("/fruits", async (req, res) => {
+    const allFruits = await Fruit.find();
+    console.log(allFruits)
+    res.send('Welome to the index page')
+  });
+
 app.get('/fruits/new', (req, res) =>{
-    res.send("This route sends the user a form")
+    res.render('fruits/new.ejs')
+})
+
+app.post('/fruits', async (req, res) => {
+    console.log(req.body)
+    res.redirect('/fruits/new')
 })
