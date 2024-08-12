@@ -30,15 +30,20 @@ app.get('/', async (req, res) =>{
 })
 app.get("/fruits", async (req, res) => {
     const allFruits = await Fruit.find();
-    console.log(allFruits)
-    res.send('Welome to the index page')
-  });
+    res.render("fruits/index.ejs", { fruits: allFruits });
+});
 
+// NEW PAGE - 
 app.get('/fruits/new', (req, res) =>{
     res.render('fruits/new.ejs')
 })
 
 app.post('/fruits', async (req, res) => {
-    console.log(req.body)
-    res.redirect('/fruits/new')
+    if (req.body.isReadyToEat === "on") {
+        req.body.isReadyToEat = true;
+    } else {
+        req.body.isReadyToEat = false;
+    }
+    await Fruit.create(req.body);
+    res.redirect("/fruits/");
 })
